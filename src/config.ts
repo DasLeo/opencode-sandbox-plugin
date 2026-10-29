@@ -18,6 +18,7 @@ export interface SandboxPluginConfig {
     allowUnixSockets?: string[]
     allowAllUnixSockets?: boolean
     allowLocalBinding?: boolean
+    allowMachLookup?: string[]
   }
 }
 
@@ -111,6 +112,7 @@ export function resolveConfig(
       allowUnixSockets: user?.network?.allowUnixSockets,
       allowAllUnixSockets: user?.network?.allowAllUnixSockets,
       allowLocalBinding: user?.network?.allowLocalBinding ?? false,
+      allowMachLookup: user?.network?.allowMachLookup,
     },
   }
 }

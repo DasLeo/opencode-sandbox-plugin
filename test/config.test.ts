@@ -68,6 +68,22 @@ describe("resolveConfig", () => {
     expect(config.network?.deniedDomains).toEqual(["evil.com"])
   })
 
+  test("user allowMachLookup is forwarded unchanged to the runtime config", () => {
+    const user: SandboxPluginConfig = {
+      network: {
+        allowMachLookup: ["com.apple.trustd*"],
+      },
+    }
+    const config = resolveConfig(PROJECT_DIR, WORKTREE, user)
+
+    expect(config.network?.allowMachLookup).toEqual(["com.apple.trustd*"])
+  })
+
+  test("allowMachLookup defaults to undefined when unset", () => {
+    const config = resolveConfig(PROJECT_DIR, WORKTREE)
+    expect(config.network?.allowMachLookup).toBeUndefined()
+  })
+
   test("partial user config keeps other defaults", () => {
     const user: SandboxPluginConfig = {
       filesystem: {
